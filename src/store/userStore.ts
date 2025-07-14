@@ -1,4 +1,4 @@
-import { create }  from 'zustand';
+import { create } from 'zustand';
 
 interface User {
   id: string;
@@ -8,7 +8,7 @@ interface User {
   email: string;
 }
 
-interface UserStoreType {
+export interface UserStoreType {
   user: User | null;
   token: string | null;
   setUser: (user: User, token: string) => void;
@@ -16,11 +16,11 @@ interface UserStoreType {
   initialize: () => void;
 }
 
-const useUser = create<UserStoreType>((set) => ({
+const useUser = create<UserStoreType>((set: (partial: Partial<UserStoreType>) => void) => ({
   user: null,
   token: null,
 
-  setUser: (user, token) => {
+  setUser: (user: User, token: string) => {
     localStorage.setItem('user', JSON.stringify(user));
     localStorage.setItem('token', token);
     set({ user, token });
