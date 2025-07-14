@@ -9,6 +9,8 @@ import {
   Box,
 } from "@mui/material";
 import { Link } from "react-router-dom";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import axiosInstance from "../axios";
 
 interface BlogCardProps {
   blog: {
@@ -26,6 +28,22 @@ interface BlogCardProps {
 
 function BlogCard({ blog }: BlogCardProps) {
   const { id, title, synopsis, featuredImg, author, createdAt } = blog;
+  const queryClient = useQueryClient();
+
+  const deleteBlogMutation = useMutation({
+    mutationFn: (id: string) => axiosInstance.delete(`/blogs/${id}`),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["myBlogs"] });
+      alert("Blog deleted.");
+    },
+    onError: () => alert("Failed to delete blog."),
+  });
+
+  const handleDeleteBlog = (id: string) => {
+    if (window.confirm("Are you sure you want to delete this blog?")) {
+      deleteBlogMutation.mutate(id);
+    }
+  };
 
   const initials = `${author.firstName[0]}${author.lastName[0]}`;
   const formattedDate = createdAt
@@ -62,6 +80,23 @@ function BlogCard({ blog }: BlogCardProps) {
         >
           Read More →
         </Button>
+        <Button
+          size="small"
+          component={Link}
+          to={`/blogs/Update/${blog.id}`}
+          variant="outlined"
+          color="success"
+          >
+            Update
+          </Button>
+          <Button
+            size="small"
+            variant="contained"
+            color="error"
+            onClick={() => handleDeleteBlog(blog.id)}
+            >
+              Delete
+            </Button>
       </CardActions>
     </Card>
   );

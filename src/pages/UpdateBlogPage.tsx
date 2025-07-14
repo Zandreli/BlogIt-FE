@@ -7,13 +7,15 @@ import {
   Paper,
   Box,
   Alert,
+  CircularProgress,
 } from "@mui/material";
 import { useParams, useNavigate } from "react-router-dom";
 import api from "../api/api";
 
 function UpdateBlogPage() {
-  const { blogId } = useParams();
+  const { blogId } = useParams<{ blogId: string }>();
   const navigate = useNavigate();
+
   const [form, setForm] = useState({
     featuredImg: "",
     title: "",
@@ -21,9 +23,13 @@ function UpdateBlogPage() {
     content: "",
   });
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!blogId) return;
+    if (!blogId) {
+      setError("Invalid blog ID.");
+      return;
+    }
 
     async function fetchBlog() {
       try {
@@ -37,6 +43,8 @@ function UpdateBlogPage() {
       } catch (err) {
         console.error(err);
         setError("Failed to load blog.");
+      } finally {
+        setLoading(false);
       }
     }
 
@@ -46,6 +54,7 @@ function UpdateBlogPage() {
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
+    setError("");
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
@@ -63,6 +72,14 @@ function UpdateBlogPage() {
       setError("Failed to update blog.");
     }
   };
+
+  if (loading) {
+    return (
+      <Container sx={{ mt: 8 }}>
+        <CircularProgress />
+      </Container>
+    );
+  }
 
   return (
     <Container sx={{ mt: 8 }}>
