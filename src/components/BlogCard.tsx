@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import axiosInstance from "../axios";
+import api from "../api/api";
 
 interface BlogCardProps {
   blog: {
@@ -31,7 +31,7 @@ function BlogCard({ blog }: BlogCardProps) {
   const queryClient = useQueryClient();
 
   const deleteBlogMutation = useMutation({
-    mutationFn: (id: string) => axiosInstance.delete(`/blogs/${id}`),
+    mutationFn: (id: string) => api.delete(`/blogs/${id}`),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["myBlogs"] });
       alert("Blog deleted.");

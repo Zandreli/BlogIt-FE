@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import axiosInstance from "../axios";
+import api from "../api/api";
 import { useState } from "react";
 
 interface Blog {
@@ -50,7 +50,7 @@ function Profile() {
   } = useQuery<User>({
     queryKey: ["user"],
     queryFn: async () => {
-      const res = await axiosInstance.get("/user/me");
+      const res = await api.get("/user/me");
       return res.data;
     },
   });
@@ -58,14 +58,14 @@ function Profile() {
   const { data: blogs = [] } = useQuery<Blog[]>({
     queryKey: ["myBlogs"],
     queryFn: async () => {
-      const res = await axiosInstance.get("/users/blogs");
+      const res = await api.get("/users/blogs");
       return res.data;
     },
   });
 
   const updateUserMutation = useMutation({
     mutationFn: (updatedUser: User) =>
-      axiosInstance.patch("/user", updatedUser),
+      api.patch("/user", updatedUser),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["user"] });
       alert("User info updated.");
@@ -75,7 +75,7 @@ function Profile() {
 
   const updatePasswordMutation = useMutation({
     mutationFn: (passwords: { currentPassword: string; newPassword: string }) =>
-      axiosInstance.patch("/user/password", passwords),
+      api.patch("/user/password", passwords),
     onSuccess: () => alert("Password updated!"),
     onError: (err: import("axios").AxiosError<{ message: string }>) => {
       alert(err?.response?.data?.message || "Password update failed.");
@@ -83,7 +83,7 @@ function Profile() {
   });
 
   const deleteBlogMutation = useMutation({
-    mutationFn: (id: string) => axiosInstance.delete(`/blogs/${id}`),
+    mutationFn: (id: string) => api.delete(`/blogs/${id}`),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["myBlogs"] });
       alert("Blog deleted.");
