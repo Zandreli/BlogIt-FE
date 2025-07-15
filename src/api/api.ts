@@ -1,9 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-    baseURL: import.meta.env.PROD
-   ? "https://blogit-be-1.onrender.com/api"
-   : "http://localhost:3000/api",
+   baseURL:"https://blogit-be-1.onrender.com/api",
     withCredentials: true
 });
 
