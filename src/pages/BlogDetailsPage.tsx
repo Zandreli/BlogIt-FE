@@ -72,7 +72,7 @@ function BlogDetailsPage() {
     if (!confirmed) return;
 
     try {
-      await api.delete(`/api/blogs/${blog.id}`);
+      await api.delete(`/blogs/${blog.id}`);
       navigate("/blogs");
     } catch (err) {
       console.error(err);
