@@ -46,7 +46,7 @@ function BlogDetailsPage() {
   useEffect(() => {
     async function fetchBlog() {
       try {
-        const res = await api.get(`/blogs/${blogId}`);
+        const res = await api.get(`/api/blogs/${blogId}`);
         if (res.data.isDeleted) {
           setError("Blog not found.");
         } else {
@@ -72,7 +72,7 @@ function BlogDetailsPage() {
     if (!confirmed) return;
 
     try {
-      await api.delete(`/blogs/${blog.id}`);
+      await api.delete(`/api/blogs/${blog.id}`);
       navigate("/blogs");
     } catch (err) {
       console.error(err);

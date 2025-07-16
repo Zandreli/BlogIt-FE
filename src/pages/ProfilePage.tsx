@@ -50,7 +50,7 @@ function Profile() {
   } = useQuery<User>({
     queryKey: ["user"],
     queryFn: async () => {
-      const res = await api.get("/user/me");
+      const res = await api.get("/api/user/me");
       return res.data;
     },
   });
@@ -58,7 +58,7 @@ function Profile() {
   const { data: blogs = [] } = useQuery<Blog[]>({
     queryKey: ["myBlogs"],
     queryFn: async () => {
-      const res = await api.get("/users/blogs");
+      const res = await api.get("/api/users/blogs");
       return res.data;
     },
   });
@@ -83,7 +83,7 @@ function Profile() {
   });
 
   const deleteBlogMutation = useMutation({
-    mutationFn: (id: string) => api.delete(`/blogs/${id}`),
+    mutationFn: (id: string) => api.delete(`/api/blogs/${id}`),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["myBlogs"] });
       alert("Blog deleted.");

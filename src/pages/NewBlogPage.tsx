@@ -14,7 +14,7 @@ import api from "../api/api";
 function NewBlogPage() {
   const navigate = useNavigate();
   const [form, setForm] = useState({
-    featuredImg: "", // will hold your pasted Cloudinary URL
+    featuredImg: "", 
     title: "",
     synopsis: "",
     content: "",

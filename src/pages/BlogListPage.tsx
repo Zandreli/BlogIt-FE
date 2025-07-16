@@ -20,7 +20,7 @@ function BlogListPage() {
     useEffect(() => {
         async function fetchBlogs() {
             try {
-                const res = await api.get('/blogs');
+                const res = await api.get('/api/blogs');
                 setBlogs(res.data.blogs);
             } catch (err) {
                 console.error('Failed to fetch blogs:', err);
