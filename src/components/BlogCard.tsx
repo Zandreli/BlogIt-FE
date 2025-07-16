@@ -89,7 +89,7 @@ function BlogCard({ blog }: BlogCardProps) {
           to={`/blogs/Update/${blog.id}`}
           variant="outlined"
           color="success"
-          endIcon
+          sx={{justifyContent: "flex-end"}}
           >
             Update
           </Button>
@@ -98,7 +98,7 @@ function BlogCard({ blog }: BlogCardProps) {
             variant="contained"
             color="error"
             onClick={() => handleDeleteBlog(blog.id)}
-            endIcon
+            sx={{justifyContent: "flex-end"}}
             >
               Delete
             </Button>
