@@ -12,7 +12,7 @@ function LoginPage() {
     async function handleLogin(e: React.FormEvent) {
         e.preventDefault();
         try {
-            const res = await api.post('/auth/login', {
+            const res = await api.post('/api/auth/login', {
                 email: emailOrUsername,
                 password
             });
