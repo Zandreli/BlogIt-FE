@@ -72,7 +72,7 @@ function BlogCard({ blog }: BlogCardProps) {
           </Typography>
         </Box>
       </CardContent>
-      <CardActions sx={{justifyContent: "flex-end"}}>
+      <CardActions>
         <Button
           size="small"
           component={Link}
@@ -81,8 +81,9 @@ function BlogCard({ blog }: BlogCardProps) {
         >
           Read More →
         </Button>
+      </CardActions>
 
-
+      <CardActions sx={{justifyContent: "flex-end"}}>
         <Button
           size="small"
           component={Link}
