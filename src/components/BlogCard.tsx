@@ -72,7 +72,7 @@ function BlogCard({ blog }: BlogCardProps) {
           </Typography>
         </Box>
       </CardContent>
-      <CardActions>
+      <CardActions sx={{justifyContent: "flex-end"}}>
         <Button
           size="small"
           component={Link}
@@ -89,7 +89,6 @@ function BlogCard({ blog }: BlogCardProps) {
           to={`/blogs/Update/${blog.id}`}
           variant="outlined"
           color="success"
-          sx={{justifyContent: "flex-end"}}
           >
             Update
           </Button>
@@ -98,7 +97,6 @@ function BlogCard({ blog }: BlogCardProps) {
             variant="contained"
             color="error"
             onClick={() => handleDeleteBlog(blog.id)}
-            sx={{justifyContent: "flex-end"}}
             >
               Delete
             </Button>
