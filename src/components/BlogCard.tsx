@@ -12,6 +12,7 @@ import { Link } from "react-router-dom";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import api from "../api/api";
 
+
 interface BlogCardProps {
   blog: {
     id: string;
@@ -82,13 +83,13 @@ function BlogCard({ blog }: BlogCardProps) {
         </Button>
 
 
-        
         <Button
           size="small"
           component={Link}
           to={`/blogs/Update/${blog.id}`}
           variant="outlined"
           color="success"
+          endIcon
           >
             Update
           </Button>
@@ -97,6 +98,7 @@ function BlogCard({ blog }: BlogCardProps) {
             variant="contained"
             color="error"
             onClick={() => handleDeleteBlog(blog.id)}
+            endIcon
             >
               Delete
             </Button>
