@@ -14,7 +14,7 @@ import api from "../api/api";
 function NewBlogPage() {
   const navigate = useNavigate();
   const [form, setForm] = useState({
-    featuredImg: "", 
+    featuredImg: "",
     title: "",
     synopsis: "",
     content: "",
@@ -32,7 +32,7 @@ function NewBlogPage() {
     }
 
     try {
-      await api.post('/blogs', form);
+      await api.post('/api/blogs', form);
       navigate('/blogs');
     } catch (err) {
       console.error(err);
