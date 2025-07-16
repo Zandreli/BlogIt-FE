@@ -65,7 +65,7 @@ function UpdateBlogPage() {
     }
 
     try {
-      await api.patch(`/blogs/${blogId}`, form);
+      await api.patch(`/api/blogs/${blogId}`, form);
       navigate("/profile");
     } catch (err) {
       console.error(err);
