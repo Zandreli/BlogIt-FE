@@ -33,7 +33,7 @@ function UpdateBlogPage() {
 
     async function fetchBlog() {
       try {
-        const res = await api.get(`/blogs/${blogId}`);
+        const res = await api.get(`api/blogs/${blogId}`);
         setForm({
           featuredImg: res.data.featuredImg || "",
           title: res.data.title || "",
