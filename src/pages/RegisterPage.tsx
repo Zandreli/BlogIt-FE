@@ -45,7 +45,7 @@ function RegisterPage() {
         }
 
         try {
-            await api.post('/api/auth/register', formData);
+            await api.post('http://localhost:3000/api/auth/register' , formData);
             navigate('/login');
         } catch (err) {
             const error = err as AxiosError<{ message: string }>;

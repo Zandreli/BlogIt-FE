@@ -32,7 +32,7 @@ function NewBlogPage() {
     }
 
     try {
-      await api.post('/api/blogs/blogs', form);
+      await api.post('http:localhost:3000/api/blogs/blogs', form);
       navigate('/blogs');
     } catch (err) {
       console.error(err);
